@@ -8,7 +8,7 @@ The application is built on top of the followings:
 
 
 
-# Features
+## Features
 
 - Text Editing
 - Saving
@@ -16,15 +16,14 @@ The application is built on top of the followings:
  
 
 
-# To Do
+## To Do
 
-- File Dialog Implementation
 - Light / Dark Mode Support
 - Save Checkings
 
 
 
-# Third Party Libraries Used
+## Third Party Libraries Used
 
 | Library | Description | Link |
 | ----- | ----- | ----- |
@@ -33,12 +32,14 @@ The application is built on top of the followings:
 
 
 
-# License
+## License
 This project is licensed under the MIT license.
 
 
 
-# Ownership
-This project (PRJ000) is owned, managed, and developed by Yeahlowflicker Production. Yeahlowflicker Production reserves
-all rights to maintain, modify, delete, and manage the project. Yeahlowflicker Production is not responsible for any
+## Ownership
+Yeahlowflicker Production, represented as "we", is the owner of this project.
+
+This project (PRJ000) is owned, managed, and developed by Yeahlowflicker Production. We reserve all rights
+to maintain, modify, delete, and manage the project. We shall take no responsibility for any
 legal issues that occurred to external users/contributors.

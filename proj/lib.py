@@ -8,6 +8,6 @@ def loadText(path):
 
 
 def saveText(path, content):
-    with open(path, "w") as file:
+    with open(path, "w+") as file:
         file.write(content)
         file.close()

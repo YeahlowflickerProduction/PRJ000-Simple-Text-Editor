@@ -13,6 +13,7 @@ if __name__ == "__main__":
 
     #   Define application
     app = qtw.QApplication(sys.argv)
+    app.setOrganizationName("Yeahlowflicker Production")
 
     #   Define engine
     engine = qtqml.QQmlApplicationEngine()
