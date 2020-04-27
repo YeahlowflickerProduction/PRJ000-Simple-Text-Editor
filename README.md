@@ -11,28 +11,30 @@ The application is built on top of the followings:
 ## Features
 
 - Text Editing
-- Saving
-- Opening
- 
-
-
-## To Do
-
-- Light / Dark Mode Support
+- File Saving/Opening
 - Save Checkings
+- Light / Dark Mode Support
+- Customizable display preferences
 
 
 
-## Third Party Libraries Used
+## Status
+[![Open Source](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://opensource.org/)
+[![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
+
+
+
+## Third Party Libraries
 
 | Library | Description | Link |
 | ----- | ----- | ----- |
-| PySide2 | Qt GUI toolkit for Python | https://pypi.org/project/PySide2/ |
+| PySide2 | Qt toolkit for Python | https://pypi.org/project/PySide2/ |
 | PyInstaller | Python application export tool | https://www.pyinstaller.org/ |
 
 
 
 ## License
+[![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/tterb/atomic-design-ui/blob/master/LICENSEs)\
 This project is licensed under the MIT license.
 
 
