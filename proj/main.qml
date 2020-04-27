@@ -9,17 +9,31 @@ ApplicationWindow
 {
     property string path: ""
     property bool saved: true
-    property variant win
+    property variant preferences_dialog
+    property variant unsaved_warn
+    property int originalCharCount: 0
+
+    property variant isDarkTheme: false
+    property variant displayFontSize: 12
+
 
     id: root
     visible: true
     title: "PRO000  |   Simple Text Editor"
+    color: isDarkTheme ? "#242424" : "white"
 
     minimumWidth: 768
     minimumHeight: 432
 
 
-
+    onClosing:
+    {
+        if(!saved)
+        {
+            close.accepted = false;
+            triggerUnsavedWarning();
+        }
+    }
 
 
     ColumnLayout
@@ -44,7 +58,16 @@ ApplicationWindow
                     implicitWidth: 80
                     implicitHeight: 35
 
-                    text: btns.model[index]
+                    contentItem: Text
+                    {
+                        text: btns.model[index];
+                        color: isDarkTheme ? "white" : "black"
+                        horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignVCenter
+                    }
+
+                    background: Rectangle { color: isDarkTheme ? "#303030" : "#EAEAEA" }
+
                     onClicked: toolButtonClickHandler(btns.model[index])
                 }
             }
@@ -60,9 +83,17 @@ ApplicationWindow
                 implicitHeight: 35
                 Layout.rightMargin: 5
 
-                text: "Preferences"
+                contentItem: Text
+                {
+                    text: "Preferences";
+                    color: isDarkTheme ? "white" : "black"
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                }
 
-                onClicked: openPreferences()
+                background: Rectangle { color: isDarkTheme ? "#303030" : "#EAEAEA" }
+
+                onClicked: triggerPreferences()
             }
         }
 
@@ -92,12 +123,14 @@ ApplicationWindow
 
                 selectByMouse: true
                 wrapMode: TextEdit.Wrap
-
+                font.pointSize: displayFontSize
+                color: isDarkTheme ? "white" : "black"
 
                 background: Rectangle
-                { color: "#CACACA" }
-            }
+                { color: isDarkTheme ? "#333333" : "#CACACA" }
 
+                Keys.onPressed: { saved = (textArea.length + 1 == originalCharCount) }
+            }
         }
     }
 
@@ -120,6 +153,7 @@ ApplicationWindow
             path = fileDialog.file.toString().replace("file://", "");
             fileHandler(mode);
             this.close();
+            saved = true;
         }
 
         onRejected: this.close();
@@ -139,6 +173,8 @@ ApplicationWindow
                 path = "";
                 fileDialog.mode = 0;
                 textArea.clear();
+                saved = true;
+                originalCharCount = 0;
                 break;
 
 
@@ -148,6 +184,7 @@ ApplicationWindow
                 fileDialog.title = "Open"
                 fileDialog.fileMode = FileDialog.OpenFile;
                 fileDialog.open();
+                saved = true;
                 break;
 
 
@@ -156,7 +193,10 @@ ApplicationWindow
             //  Otherwise open file dialog and let user choose save path
             case "Save":
                 if (path.Length > 0)
+                {
                     fileHandler(1);
+                    saved = true;
+                }
                 else
                 {
                     fileDialog.mode = 1;
@@ -189,6 +229,8 @@ ApplicationWindow
             textArea.text = manager.load(path);
         else if (mode == 1)
             manager.save(path, textArea.text);
+
+        originalCharCount = textArea.length;
     }
 
 
@@ -197,16 +239,44 @@ ApplicationWindow
 
 
     //  Trigger preference window
-    function openPreferences()
+    function triggerPreferences()
     {
         //  Only open new window when there is no existing preference window
         //  New preference window object will be instantiated
-        if (win == null)
+        //  Self will be hidden
+        if (preferences_dialog == null)
         {
             var component = Qt.createComponent("/mnt/Data/Projects/PRJ000-Simple-Text-Editor/proj/preferences.qml");
-            win = component.createObject(root);
-            win.show();
+            preferences_dialog = component.createObject(root);
+            preferences_dialog.show();
+            preferences_dialog.raise();
         }
     }
 
+
+
+    //  Trigger unsaved warning
+    //  Similar to openPreferences
+    function triggerUnsavedWarning()
+    {
+        if (unsaved_warn == null)
+        {
+            var component = Qt.createComponent("/mnt/Data/Projects/PRJ000-Simple-Text-Editor/proj/unsavedWarning.qml");
+            unsaved_warn = component.createObject(root);
+            unsaved_warn.show();
+            unsaved_warn.raise();
+        }
+    }
+
+
+
+
+    //  Initialization
+    //  Retrieve and apply stored preference values
+    Component.onCompleted:
+    {
+        var data = manager.loadPreferences();
+        isDarkTheme = data[0];
+        displayFontSize = data[1];
+    }
 }

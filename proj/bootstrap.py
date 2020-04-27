@@ -17,10 +17,9 @@ if __name__ == "__main__":
 
     #   Define engine
     engine = qtqml.QQmlApplicationEngine()
+    manager = Main(engine)
     engine.load(qtc.QUrl("/mnt/Data/Projects/PRJ000-Simple-Text-Editor/proj/main.qml"))
 
-    #   Define manager
-    manager = Main(engine)
 
     #   Exit handler
     sys.exit(app.exec_())

@@ -5,7 +5,10 @@ import lib
 
 class Main(qtc.QObject):
 
+    prefPath = "/mnt/Data/Projects/PRJ000-Simple-Text-Editor/proj/preferences.yf"
+
     engine = None
+
 
     #   Initialization
     def __init__(self, engine):
@@ -14,6 +17,7 @@ class Main(qtc.QObject):
 
         #   Add QML reference of self
         engine.rootContext().setContextProperty("manager", self)
+
 
 
 
@@ -29,3 +33,22 @@ class Main(qtc.QObject):
     def load(self, path):
         ctn = lib.loadText(path)
         return ctn
+
+
+
+    #   Load and return application preferences
+    @qtc.Slot(result="QVariantList")
+    def loadPreferences(self):
+        from os import path
+        if path.exists(self.prefPath):
+            return list(lib.loadObject(self.prefPath))
+        else:
+            self.savePreferences(False, 12)
+            return False, 12
+
+
+
+    #   Save application preferences to file
+    @qtc.Slot(bool, int)
+    def savePreferences(self, isDarkTheme, displayFontSize):
+        lib.saveObject(self.prefPath, isDarkTheme, displayFontSize)
