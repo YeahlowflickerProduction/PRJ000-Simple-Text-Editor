@@ -153,7 +153,6 @@ ApplicationWindow
             path = fileDialog.file.toString().replace("file://", "");
             fileHandler(mode);
             this.close();
-            saved = true;
         }
 
         onRejected: this.close();
@@ -184,7 +183,6 @@ ApplicationWindow
                 fileDialog.title = "Open"
                 fileDialog.fileMode = FileDialog.OpenFile;
                 fileDialog.open();
-                saved = true;
                 break;
 
 
@@ -192,7 +190,7 @@ ApplicationWindow
             //  If a file is loaded, directly save to that file
             //  Otherwise open file dialog and let user choose save path
             case "Save":
-                if (path.Length > 0)
+                if (path.length > 0)
                 {
                     fileHandler(1);
                     saved = true;
@@ -231,6 +229,7 @@ ApplicationWindow
             manager.save(path, textArea.text);
 
         originalCharCount = textArea.length;
+        saved = true;
     }
 
 
