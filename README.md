@@ -34,8 +34,7 @@ The application is built on top of the followings:
 
 
 ## License
-[![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/tterb/atomic-design-ui/blob/master/LICENSEs)\
-This project is licensed under the MIT license.
+This project is licensed under the GPL v3 license.
 
 
 
