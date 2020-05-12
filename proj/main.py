@@ -5,7 +5,7 @@ import lib
 
 class Main(qtc.QObject):
 
-    prefPath = "/mnt/Data/Projects/PRJ000-Simple-Text-Editor/proj/preferences.yf"
+    prefPath = "/mnt/YFP/Projects/PRJ000-Simple-Text-Editor/proj/preferences.yf"
 
     engine = None
 

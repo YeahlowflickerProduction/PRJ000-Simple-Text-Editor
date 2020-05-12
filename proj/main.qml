@@ -245,7 +245,7 @@ ApplicationWindow
         //  Self will be hidden
         if (preferences_dialog == null)
         {
-            var component = Qt.createComponent("/mnt/Data/Projects/PRJ000-Simple-Text-Editor/proj/preferences.qml");
+            var component = Qt.createComponent("/mnt/YFP/Projects/PRJ000-Simple-Text-Editor/proj/preferences.qml");
             preferences_dialog = component.createObject(root);
             preferences_dialog.show();
             preferences_dialog.raise();
@@ -260,7 +260,7 @@ ApplicationWindow
     {
         if (unsaved_warn == null)
         {
-            var component = Qt.createComponent("/mnt/Data/Projects/PRJ000-Simple-Text-Editor/proj/unsavedWarning.qml");
+            var component = Qt.createComponent("/mnt/YFP/Projects/PRJ000-Simple-Text-Editor/proj/unsavedWarning.qml");
             unsaved_warn = component.createObject(root);
             unsaved_warn.show();
             unsaved_warn.raise();

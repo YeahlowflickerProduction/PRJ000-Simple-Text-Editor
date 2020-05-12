@@ -4,7 +4,7 @@ block_cipher = None
 
 
 a = Analysis(['bootstrap.py'],
-             pathex=['/mnt/Data/Projects/PRJ000-Simple-Text-Editor/proj'],
+             pathex=['/mnt/YFP/Projects/PRJ000-Simple-Text-Editor/proj'],
              binaries=[],
              datas=[],
              hiddenimports=[],
