@@ -9,6 +9,9 @@ Window
 {
     id: pref
 
+    property variant isDarkTheme: false
+    property variant displayFontSize: 12
+
     minimumWidth: 300
     minimumHeight: 250
     maximumWidth: 300
@@ -17,7 +20,7 @@ Window
     visible: true
     title: "Preferences"
 
-    color: root.isDarkTheme ? "#242424" : "white"
+    color: isDarkTheme ? "#242424" : "white"
 
 
     ColumnLayout
@@ -37,7 +40,7 @@ Window
                 {
                     Layout.leftMargin: 15
                     text: "Theme"
-                    color: root.isDarkTheme ? "white" : "black"
+                    color: isDarkTheme ? "white" : "black"
                 }
 
                 Item { Layout.fillWidth: true }
@@ -54,7 +57,7 @@ Window
                     }
 
 
-                    onActivated: root.isDarkTheme = !(index == 0);
+                    onActivated: isDarkTheme = !(index == 0);
                 }
             }
 
@@ -68,7 +71,7 @@ Window
                 {
                     Layout.leftMargin: 15
                     text: "Display Font Size"
-                    color: root.isDarkTheme ? "white" : "black"
+                    color: isDarkTheme ? "white" : "black"
                 }
 
                 Item { Layout.fillWidth: true }
@@ -90,13 +93,13 @@ Window
                     onActivated:
                     {
                         if(index == 0)
-                            root.displayFontSize = 10;
+                            displayFontSize = 10;
                         else if (index == 1)
-                            root.displayFontSize = 12;
+                            displayFontSize = 12;
                         else if (index == 2)
-                            root.displayFontSize = 16;
+                            displayFontSize = 16;
                         else if (index == 3)
-                            root.displayFontSize = 24;
+                            displayFontSize = 24;
                     }
                 }
             }
@@ -121,15 +124,17 @@ Window
                 contentItem: Text
                 {
                     text: "OK";
-                    color: root.isDarkTheme ? "white" : "black"
+                    color: isDarkTheme ? "white" : "black"
                     horizontalAlignment: Text.AlignHCenter
                     verticalAlignment: Text.AlignVCenter
                 }
 
-                background: Rectangle { color: root.isDarkTheme ? "#303030" : "#EAEAEA" }
+                background: Rectangle { color: isDarkTheme ? "#303030" : "#EAEAEA" }
 
                 onClicked:
                 {
+                    root.isDarkTheme = pref.isDarkTheme;
+                    root.displayFontSize = pref.displayFontSize;
                     manager.savePreferences(root.isDarkTheme, root.displayFontSize)
                     pref.close();
                 }
@@ -143,12 +148,12 @@ Window
                 contentItem: Text
                 {
                     text: "Cancel";
-                    color: root.isDarkTheme ? "white" : "black"
+                    color: isDarkTheme ? "white" : "black"
                     horizontalAlignment: Text.AlignHCenter
                     verticalAlignment: Text.AlignVCenter
                 }
 
-                background: Rectangle { color: root.isDarkTheme ? "#303030" : "#EAEAEA" }
+                background: Rectangle { color: isDarkTheme ? "#303030" : "#EAEAEA" }
 
                 onClicked: pref.close();
             }
@@ -166,18 +171,23 @@ Window
         root.hide();
 
 
+        pref.isDarkTheme = root.isDarkTheme;
+        pref.displayFontSize = root.displayFontSize;
+
+
+
         //  Set combo box values
 
-        if (root.isDarkTheme) themeSelector.currentIndex = 1;
+        if (isDarkTheme) themeSelector.currentIndex = 1;
         else themeSelector.currentIndex = 0;
 
-        if (root.displayFontSize == 10)
+        if (displayFontSize == 10)
             displayFontSizeSelector.currentIndex = 0;
-        else if (root.displayFontSize == 12)
+        else if (displayFontSize == 12)
             displayFontSizeSelector.currentIndex = 1;
-        else if (root.displayFontSize == 16)
+        else if (displayFontSize == 16)
             displayFontSizeSelector.currentIndex = 2;
-        else if (root.displayFontSize == 24)
+        else if (displayFontSize == 24)
             displayFontSizeSelector.currentIndex = 3;
     }
 

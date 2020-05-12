@@ -84,3 +84,6 @@ proj/venv/
 
 # .idea
 proj/.idea/
+
+# media file
+media/

@@ -19,7 +19,7 @@ ApplicationWindow
 
     id: root
     visible: true
-    title: "PRO000  |   Simple Text Editor"
+    title: "PRJ000  |   Simple Text Editor"
     color: isDarkTheme ? "#242424" : "white"
 
     minimumWidth: 768
